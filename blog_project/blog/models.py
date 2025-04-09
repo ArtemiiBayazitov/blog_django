@@ -1,10 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.db.models import CASCADE
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=30)
 
     class Meta:
         verbose_name_plural = 'categories'
@@ -18,7 +17,7 @@ class Post(models.Model):
     context = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
-    category = models.ManyToManyField('Category', related_name='posts')
+    categories = models.ManyToManyField('Category', related_name='posts')
 
     def __str__(self):
         return self.title
